@@ -1,9 +1,14 @@
 mod lexer;
 
-use lexer::parser;
+use lexer::parser::{Parser, ResolvedEntry};
+
+use std::env;
+use std::fs;
 
 fn main() {
-    println!("Hello, world!");
+    let args = std::env::args();
 
-    parser::parse_example();
+    let data: ResolvedEntry = Parser::resolve_entry(args);
+
+    Parser::parse(data);
 }
