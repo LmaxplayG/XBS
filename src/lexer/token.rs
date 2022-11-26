@@ -10,7 +10,6 @@
 use std::fmt::Debug;
 
 #[derive(Debug, PartialEq)]
-#[allow(dead_code)]
 pub enum DataType {
     String(String),
     Int(i64),
