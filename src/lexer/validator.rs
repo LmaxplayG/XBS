@@ -17,7 +17,6 @@ pub struct ErrorContext {
 /// of error that occurred
 /// during lex validation.
 ///
-#[allow(dead_code)]
 pub enum ErrorType {
     ///
     /// Syntax error
@@ -54,7 +53,6 @@ pub enum ErrorType {
     None
 }
 
-#[allow(dead_code)]
 pub struct Error {
     ///
     /// Defines the context the error is in
@@ -73,7 +71,6 @@ pub struct Error {
     data: [String]
 }
 
-#[allow(dead_code)]
 pub struct LexerValidator {
 
 }
@@ -89,5 +86,5 @@ impl LexerValidator {
     //     // NYE (NOT YET IMPLEMENTED)
     //     return 
     // }
-    pub fn PLACEHOLDER() {}
+    pub fn placeholder() {}
 }

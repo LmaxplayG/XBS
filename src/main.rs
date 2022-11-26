@@ -1,3 +1,6 @@
+// Global allow unused imports
+#[allow(unused_imports)]
+#[allow(dead_code)]
 mod lexer;
 
 use lexer::parser::{Parser, ResolvedEntry};
