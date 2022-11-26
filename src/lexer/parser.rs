@@ -36,15 +36,24 @@ impl Parser {
             }
         }
 
-        //
-        //  This is very unsafe, should
-        //  implement a better way of handling these
-        //  conversions.
-        //
         ResolvedEntry {
-            full_path: path.to_str().unwrap().to_string(),
-            file_name: path.file_name().unwrap().to_str().unwrap().to_string(),
-            parent_directory: path.parent().unwrap().to_str().unwrap().to_string(),
+            full_path: path
+                        .to_str()
+                        .expect("[Lexer::Parser]: Failed to convert PathBuf to &str! (ERROR)").to_string(),
+
+            file_name: path
+                        .file_name()
+                        .expect("[Lexer::Parser]: Failed to obtain file name! (ERROR)")
+                        .to_str()
+                        .expect("[Lexer::Parser]: Failed to convert file name's &OsStr to &str! (ERROR)")
+                        .to_string(),
+
+            parent_directory: path
+                                .parent()
+                                .expect("[Lexer::Parser]: Failed to obtain parent directory! (ERROR)")
+                                .to_str()
+                                .expect("[Lexer::Parser]: Failed to convert parent directory's &OsStr to &str! (ERROR)")
+                                .to_string(),
         }
     }
 
