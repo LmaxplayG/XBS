@@ -1,0 +1,5 @@
+@module nested {
+    @properties {
+        .hello_nested: String := "Hello, nested!"
+    }
+}

@@ -1,0 +1,7 @@
+@import nested/nested
+
+@module lala {
+    @properties {
+        .hello_world: String := "Hello, world!"
+    }
+}
