@@ -16,7 +16,41 @@ pub enum DataType {
     Float(f64),
     Character(char),
     Boolean,
-    Struct
+    Struct,
+    Opaque
+}
+
+#[derive(Debug, PartialEq)]
+pub enum EqType {
+    ///
+    /// `x == 3`
+    ///
+    Equal,
+
+    ///
+    /// `x != 3`
+    ///
+    NotEqual,
+
+    ///
+    /// `x > 3`
+    /// 
+    GreaterThan,
+
+    ///
+    /// `x < 3`
+    /// 
+    LessThan,
+
+    ///
+    /// `x >= 3`
+    /// 
+    GreaterThanEqual,
+    
+    ///
+    /// `x <= 3`
+    /// 
+    LessThanEqual,
 }
 
 #[derive(Debug, PartialEq)]
@@ -52,6 +86,57 @@ pub enum Token {
     Array(DataType),
 
     ///
+    /// Mathematical binary addition operator.
+    /// 
+    Add,
+
+    ///
+    /// Mathematical subtraction operator.
+    /// 
+    Subtract,
+
+    ///
+    /// Mathematical binary multiplication operator.
+    /// 
+    Multiply,
+
+    ///
+    /// Mathematical division operator.
+    /// 
+    Divide,
+
+    ///
+    /// Modulus operator.
+    /// 
+    Mod,
+
+    ///
+    /// Equality<?> operation.
+    ///
+    ValueAssertion(EqType),
+
+    ///
+    /// "Define" operator for values.
+    /// 
+    /// Example:
+    /// ```groovy
+    ///     @let x := 2;
+    /// ```
+    /// 
+    Define,
+
+    ///
+    /// Function parameters to be
+    /// piped to a function call.
+    /// 
+    FunctionParams(DataType),
+
+    ///
+    /// Function **type* for external imports.
+    ///
+    FunctionType,
+
+    ///
     /// Keyword for declaring a
     /// C-like struct.
     ///
@@ -63,8 +148,8 @@ pub enum Token {
     Opaque,
 
     ///
-    /// Declares a local variable relative
-    /// to the current scope.
+    /// Keyword for declaring a local variable
+    /// relative to the current scope.
     ///
     Let,
 
@@ -72,11 +157,6 @@ pub enum Token {
     ///  Keyword to declare a new function.
     ///
     Function,
-
-    ///
-    /// Function **type* for external imports.
-    ///
-    FunctionT,
 
     ///
     ///  Keyword for importing built-in

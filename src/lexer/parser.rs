@@ -13,6 +13,21 @@ use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
+/*
+@import Builtins/Python
+
+@config Buitlins/Python {
+    .bin_path as String := "/usr/bin/python3"
+}
+*/
+
+pub struct ParsedLine {
+    expression: String,
+    keyword: Token,
+    keyword_ctx: String,
+    value_type: Option<Token>,
+}
+
 pub struct ResolvedEntry {
     pub file_name: String,
     pub full_path: String,
@@ -22,6 +37,10 @@ pub struct ResolvedEntry {
 pub struct Parser {}
 
 impl Parser {
+    ///
+    /// Parses command-line arguments to
+    /// search for the entry point file.
+    /// 
     pub fn resolve_entry(cli_args: env::Args) -> ResolvedEntry {
         let mut path: PathBuf = PathBuf::new();
 
@@ -39,20 +58,21 @@ impl Parser {
         ResolvedEntry {
             full_path: path
                         .to_str()
-                        .expect("[Lexer::Parser]: Failed to convert PathBuf to &str! (ERROR)").to_string(),
+                        .expect("[Lexer::Parser]: Failed to convert PathBuf to &str! (INTERNAL_ERROR)")
+                        .to_string(),
 
             file_name: path
                         .file_name()
-                        .expect("[Lexer::Parser]: Failed to obtain file name! (ERROR)")
+                        .expect("[Lexer::Parser]: Failed to obtain file name! (INTERNAL_ERROR)")
                         .to_str()
-                        .expect("[Lexer::Parser]: Failed to convert file name's &OsStr to &str! (ERROR)")
+                        .expect("[Lexer::Parser]: Failed to convert file name's &OsStr to &str! (INTERNAL_ERROR)")
                         .to_string(),
 
             parent_directory: path
-                                .parent()
-                                .expect("[Lexer::Parser]: Failed to obtain parent directory! (ERROR)")
+                            .parent()
+                                .expect("[Lexer::Parser]: Failed to obtain parent directory! (INTERNAL_ERROR)")
                                 .to_str()
-                                .expect("[Lexer::Parser]: Failed to convert parent directory's &OsStr to &str! (ERROR)")
+                                .expect("[Lexer::Parser]: Failed to convert parent directory's &OsStr to &str! (INTERNAL_ERROR)")
                                 .to_string(),
         }
     }

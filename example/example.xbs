@@ -1,1 +1,5 @@
-@import lala
+@function hello_world -> () -> () {
+    @print "Hello, world!"
+}
+
+@call(.hello_world) <- ()
