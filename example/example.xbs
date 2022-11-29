@@ -2,4 +2,21 @@
     @print "Hello, world!"
 }
 
-@call(.hello_world) <- ()
+@call(.hello_world) <- () // Hello, world!
+
+@print <- (() -> () {
+    @return "Hello, world!"
+}) // Hello, world!
+
+@assert <- (() -> () {
+    @return "Hello, world!"
+})() == "Hello, world!" // true
+
+@let @function randbetween (min, max) -> () {
+    @return @std::rand() % (max - min) + min // e.g. 0 <= randbetween(0, 10) < 10
+}
+
+@assert <- (() -> () {
+    @let rnd = @call(.randbetween)
+    @return 0 <= rnd(0, 10) < 10 // true (if @std::rand() is implemented correctly)
+})() // true
