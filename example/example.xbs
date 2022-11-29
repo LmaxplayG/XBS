@@ -8,15 +8,22 @@
     @return "Hello, world!"
 }) // Hello, world!
 
-@assert <- (() -> () {
+@assert <- ("Assertion Message", () -> () {
     @return "Hello, world!"
-})() == "Hello, world!" // true
+})() == "Hello, world!"
 
-@let @function randbetween (min, max) -> () {
-    @return @std::rand() % (max - min) + min // e.g. 0 <= randbetween(0, 10) < 10
+@let @function randbetween (min: Number, max: Number) -> () { // min and max are parameters
+    @return @std::rand() % (max - min) + min // 0 <= randbetween(0, 10) < 10
+} // @let @function
+
+@let a = 0;
+
+@if a == 0 { // NOTE: no parentheses
+    @print "a is 0"
+} @else {
+    @print "a aint 0, it's " + a->string() // a aint 0, it's <a>
 }
 
-@assert <- (() -> () {
-    @let rnd = @call(.randbetween)
-    @return 0 <= rnd(0, 10) < 10 // true (if @std::rand() is implemented correctly)
-})() // true
+@let one = 1, two = 2, three = 3 // Multiple variables can be declared at once
+
+@print "One is " + one->string(); @debug "Two is " + two->string() // One is 1 | [DEBUG] Two is 2 (if --debug), also 2 commands on one line using ;
